@@ -20,6 +20,18 @@ server/uploads/profiles/*
 server/uploads/orders/*
 !server/uploads/profiles/.gitkeep
 !server/uploads/orders/.gitkeep
+backend/.env
+backend/uploads/*
+!backend/uploads/.gitkeep
+!backend/uploads/profiles/
+!backend/uploads/orders/
+!backend/uploads/gallery/
+backend/uploads/profiles/*
+backend/uploads/orders/*
+backend/uploads/gallery/*
+!backend/uploads/profiles/.gitkeep
+!backend/uploads/orders/.gitkeep
+!backend/uploads/gallery/.gitkeep
 
 # Editor directories and files
 .vscode/*

@@ -52,4 +52,8 @@ export const api = {
   myOrders: () => request('/orders/my'),
   allOrders: () => request('/orders'),
   updateOrderStatus: (id, orderStatus) => request(`/orders/${id}/status`, { method: 'PATCH', body: JSON.stringify({ orderStatus }) }),
+  createInquiry: (payload) => request('/contact', { method: 'POST', body: JSON.stringify(payload) }),
+  gallery: () => request('/gallery'),
+  testimonials: () => request('/testimonials'),
+  adminDashboard: () => request('/admin/dashboard'),
 }

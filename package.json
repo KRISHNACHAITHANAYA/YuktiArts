@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "node server/index.js",
+    "server": "node backend/server.js",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "create:admin": "node server/scripts/createAdmin.js",
+    "create:admin": "node backend/scripts/createAdmin.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

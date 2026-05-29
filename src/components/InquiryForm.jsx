@@ -47,7 +47,15 @@ export default function InquiryForm({ mode = 'contact' }) {
         await api.createOrder(orderData)
         setFormStatus('Custom order submitted successfully. View it under My Orders.')
       } else {
-        setFormStatus('Inquiry ready. Connect EmailJS service IDs to send this form live.')
+        const inquiryData = Object.fromEntries(new FormData(event.currentTarget).entries())
+        await api.createInquiry({
+          name: inquiryData.name,
+          email: inquiryData.email,
+          phone: inquiryData.phone,
+          subject: inquiryData.artworkType,
+          message: inquiryData.message,
+        })
+        setFormStatus('Inquiry submitted successfully. We will contact you soon.')
       }
     } catch (err) {
       setFormStatus(err.message)
@@ -68,7 +76,7 @@ export default function InquiryForm({ mode = 'contact' }) {
       <label>Upload Reference Image<input name="reference" type="file" accept="image/*" /></label>
       <button className="btn btn-primary" type="submit"><Send size={18} /> Submit Inquiry</button>
       <div className="form-status" role="status" aria-live="polite">{formStatus}</div>
-      <p className="section-copy"><Upload size={16} style={{ display: 'inline', verticalAlign: '-3px' }} /> EmailJS package is installed; add service/template/public IDs to send inquiries from production.</p>
+      <p className="section-copy"><Upload size={16} style={{ display: 'inline', verticalAlign: '-3px' }} /> Add a clear reference image for custom orders so details can be confirmed quickly.</p>
     </form>
   )
 }
