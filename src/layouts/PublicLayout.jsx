@@ -6,6 +6,7 @@ import AccountMenu from '../components/AccountMenu'
 const navItems = [
   ['Home', '/'],
   ['About', '/about'],
+  ['Products', '/products'],
   ['Gallery', '/gallery'],
   ['Services', '/services'],
   ['Custom Orders', '/custom-orders'],

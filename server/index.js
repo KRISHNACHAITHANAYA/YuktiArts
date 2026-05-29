@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
-import mongoSanitize from 'express-mongo-sanitize'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
 import { connectDB } from './config/db.js'
@@ -27,7 +26,22 @@ app.use(
 )
 app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ extended: true }))
-app.use(mongoSanitize())
+app.use((req, _res, next) => {
+  const sanitize = (value) => {
+    if (Array.isArray(value)) return value.map(sanitize)
+    if (!value || typeof value !== 'object') return value
+
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([key]) => !key.startsWith('$') && !key.includes('.'))
+        .map(([key, item]) => [key, sanitize(item)]),
+    )
+  }
+
+  req.body = sanitize(req.body)
+  req.params = sanitize(req.params)
+  next()
+})
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 150 }))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 

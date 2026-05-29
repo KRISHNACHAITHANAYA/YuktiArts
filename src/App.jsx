@@ -5,6 +5,7 @@ import ProtectedRoute from './routes/ProtectedRoute'
 import Home from './pages/Home/Home'
 import About from './pages/About/About'
 import Gallery from './pages/Gallery/Gallery'
+import Products from './pages/Products/Products'
 import Services from './pages/Services/Services'
 import CustomOrders from './pages/CustomOrders/CustomOrders'
 import Testimonials from './pages/Testimonials/Testimonials'
@@ -32,6 +33,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="products" element={<Products />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="services" element={<Services />} />
           <Route path="custom-orders" element={<CustomOrders />} />

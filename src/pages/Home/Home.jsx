@@ -53,6 +53,7 @@ export default function Home() {
         <div className="container">
           <SectionHeader eyebrow="Featured Artworks" title="Shop handmade products with visible prices." copy="Browse a curated preview of product-ready artwork and gifting pieces." />
           <ProductCatalog />
+          <div className="hero-actions"><Link className="btn btn-primary" to="/products">View All Products</Link></div>
         </div>
       </section>
 
