@@ -24,10 +24,15 @@ async function request(path, options = {}) {
   }
   if (token) headers.set('Authorization', `Bearer ${token}`)
 
-  const response = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers,
-  })
+  let response
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      ...options,
+      headers,
+    })
+  } catch {
+    throw new Error('Unable to connect to server. Check backend hosting, MongoDB, and VITE_API_URL.')
+  }
 
   const data = await response.json().catch(() => ({}))
   if (!response.ok) {

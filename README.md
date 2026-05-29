@@ -1,16 +1,83 @@
-# React + Vite
+# Yukti Artful
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Premium handmade arts and crafts website with React frontend, Express API, JWT authentication, role-based admin access, and MongoDB Atlas integration.
 
-Currently, two official plugins are available:
+## Local Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Install dependencies:
 
-## React Compiler
+```bash
+npm install
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Create `.env` from `.env.example`:
 
-## Expanding the ESLint configuration
+```bash
+copy .env.example .env
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Replace the placeholder MongoDB URI in `.env` with your real MongoDB Atlas connection string:
+
+```env
+MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/yukti-artful
+JWT_SECRET=use-a-long-random-secret
+CLIENT_URL=http://localhost:5173
+```
+
+4. Start frontend and backend:
+
+```bash
+npm run dev:full
+```
+
+## Admin Login Setup
+
+Admin login will not work until the backend is running and an admin user exists in MongoDB.
+
+Create an admin user:
+
+```bash
+npm run create:admin -- "Admin Name" admin@yuktiartful.com +919999999999 "StrongPass@123"
+```
+
+Then open:
+
+```txt
+http://localhost:5173/admin/login
+```
+
+Use the email and password you created with the command above.
+
+## Hosting Notes
+
+Deploy the frontend and backend separately.
+
+Frontend environment variable:
+
+```env
+VITE_API_URL=https://your-backend-domain.com/api
+VITE_API_ORIGIN=https://your-backend-domain.com
+```
+
+Backend environment variables:
+
+```env
+PORT=5000
+CLIENT_URL=https://your-frontend-domain.com
+MONGODB_URI=your-mongodb-atlas-uri
+JWT_SECRET=your-long-secret
+JWT_EXPIRES_IN=7d
+```
+
+After hosting, admin login is:
+
+```txt
+https://your-frontend-domain.com/admin/login
+```
+
+If admin login shows an error, check:
+
+- Backend server is deployed and running.
+- `MONGODB_URI` is real, not the placeholder.
+- `VITE_API_URL` points to the deployed backend `/api`.
+- Admin user has been created in MongoDB.
